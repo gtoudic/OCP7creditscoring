@@ -11,7 +11,7 @@ Pour encadrer tout cela, nous avons adopté une approche globale MLOps. Cela com
 - `.github/workflows/`: Contient les fichiers de configuration pour l'intégration et le déploiement continu (CI/CD) avec GitHub Actions.
   
 - `Data/`: Dossier pour les fichiers de données utilisés par l'API.
-  - `test_selected_data.csv`: Fichier de données.  
+  - `test_data.csv`: Fichier de données.  
   
 - `Models/`: Contient les modèles de machine learning sérialisés et d'autres objets relatifs aux modèles.
   - `best_model.pkl`: Le meilleur modèle entraîné pour le scoring de crédit.
