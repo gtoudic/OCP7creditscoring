@@ -20,7 +20,6 @@ import mlflow
 import mlflow.sklearn
 from mlflow import sklearn as mlflow_sklearn
 from mlflow.models.signature import infer_signature
-from mlflow import MlflowClient
 
 
 
