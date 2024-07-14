@@ -19,7 +19,7 @@ RUN pip install -r requirements.txt
 RUN pip list
 
 # expose the port that uvicorn will run the app on
-EXPOSE 8083
+EXPOSE 8000
 
 # execute the command python api.py (in the WORKDIR) to start the app
-CMD ["uvicorn", "api:app", "--reload"]
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
