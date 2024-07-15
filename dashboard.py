@@ -19,6 +19,7 @@ st.title("Démonstration de Scoring")
 
 # Couleurs pour les prédictions
 CLASSES_COLORS = {'Accepté': 'green', 'Refusé': 'red'}
+DEFAULT_COLOR = "gray"
 
 # Sélection des valeurs par l'utilisateur
 name_contract_type = st.selectbox("Type de Contrat", contract_types)
@@ -47,7 +48,7 @@ if st.button("Obtenir la prédiction"):
                 prediction = response_data["class_prediction"]
                 color = CLASSES_COLORS[prediction]
                 # Afficher la prédiction avec la couleur appropriée
-                st.markdown(f'<p style="color:{color};">La prédiction est : {prediction}</p>', unsafe_allow_html=True)
+                st.markdown(f'<p style="color:{color}; font-size:24px;">{prediction}</p>', unsafe_allow_html=True)
             else:
                 st.error(f"Erreur de l'API : {response_data['detail']}")
         except Exception as e:

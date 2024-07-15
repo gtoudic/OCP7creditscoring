@@ -7,4 +7,3 @@ numba==0.57.1
 numpy==1.24.3
 lightgbm==4.4.0
 shap===0.42.1
-numba==0.58.1
