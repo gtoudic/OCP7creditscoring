@@ -124,7 +124,8 @@ class PredictionOutput(BaseModel):
 # async défini une fonction asynchrone qui permet de gérer de nombreuses requêtes de manière efficace sans bloquer le thread principal
 @app.get("/health")
 async def health_check():
-    return {"status": "ok"}
+    #return {"status": "ok"}
+    return {"data": "Application ran successfully - FastAPI release v2.0"}
 
 # Endpoint de prédiction
 @app.post("/predict", response_model=PredictionOutput)
