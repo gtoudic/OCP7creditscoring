@@ -30,7 +30,7 @@ Pour encadrer tout cela, nous avons adopté une approche globale MLOps. Cela com
 
 Les fichiers avec les packages utilisés pour l'ensemble du projet s'intitulent : requierements.txt.  
 
-Lien vers l'API : 
+Lien vers l'API : https://fastapi-cd.azurewebsites.net/docs#
 
 Lien vers l'interface Streamlit : 
 
