@@ -5,7 +5,7 @@ import requests
 
 # API url en local ou sur le cloud à tester/paramétrer
 #API_URL = "http://0.0.0.0:8000/"
-#API_URL = "https://scoringapp-api.azurewebsites.net/"
+#API_URL = "https://fastapi-cd.azurewebsites.net/"
 
 
 # Définir les options pour les menus déroulants avec une option vide

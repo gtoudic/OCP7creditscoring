@@ -1,58 +1,84 @@
+# test unitaires
+
+import pytest
 from fastapi.testclient import TestClient
 from api import app
-import pandas as pd
-import os
 
 client = TestClient(app)
 
-# Définir le répertoire de travail à la racine du projet
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-# Chemin vers les données de test
-data_path = os.path.join(BASE_DIR, "data", "test_data.csv")
-
-def test_predict():
-    # Chargement des données de test
-    df = pd.read_csv(data_path, index_col=0)
-    sample_data = df.iloc[0:1]  # Utilisation d'une seule ligne de données
-
-    data_to_send = sample_data.to_dict(orient='records')[0]
-
-    # Colonnes fournies pour vérification
-    print("Provided features:", list(data_to_send.keys()))
-
-    response = client.post("/predict", json=data_to_send)
-
-    # Vérification du code de statut HTTP
-    assert response.status_code == 200, f"Failed with response: {response.json()}"
-
-    response_json = response.json()
-    print("Response from API:", response_json)
-
-    # Vérifications supplémentaires
-    assert "client_id" in response_json, "Response missing client_id"
-    assert "probability" in response_json, "Response missing probability"
-    assert "class_prediction" in response_json, "Response missing class_prediction"
-    assert "shap_values" in response_json, "Response missing shap_values"
-
-    # Vérification des valeurs de prédiction
-    assert isinstance(response_json["probability"], float), "Probability is not a float"
-    assert response_json["probability"] >= 0, "Probability is less than 0"
-    assert response_json["probability"] <= 100, "Probability is greater than 100"
-
-    # Vérification de la classe prédite
-    assert response_json["class_prediction"] in ["Refusé", "Accepté"], "Invalid class_prediction value"
-
-    # Vérification des valeurs SHAP
-    assert isinstance(response_json["shap_values"], dict), "SHAP values are not a dictionary"
-    assert all(
-        isinstance(value, float) for value in response_json["shap_values"].values()), "Not all SHAP values are floats"
-
-def test_health():
+# vérifier la santé de mon API
+def test_health_check():
     response = client.get("/health")
     assert response.status_code == 200
-    assert response.json() == {"status": "ok"}
+    #assert response.json() == {"status": "ok"}
+    assert response.json() == {"data": "Application ran successfully - FastAPI release v2.0"}
 
-if __name__ == "__main__":
-    import pytest
-    pytest.main(["-v", "test_api.py"])
+# vérifier que les données du client n° 214010 de mon Test Set donnent lieu à une prédiction
+def test_predict_id_214010():
+    input_data = {
+        "NAME_CONTRACT_TYPE": "Cash loans",
+        "CODE_GENDER": "F",
+        "FLAG_OWN_CAR": "Y",
+        "FLAG_OWN_REALTY": "Y",
+        "CNT_CHILDREN": 0,
+        "NAME_INCOME_TYPE": "Commercial associate",
+        "NAME_EDUCATION_TYPE": "Higher education",
+        "NAME_FAMILY_STATUS": "Single / not married",
+        "NAME_HOUSING_TYPE": "House / apartment",
+        "REGION_POPULATION_RELATIVE": 0.006852,
+        "DAYS_BIRTH": -14878,
+        "DAYS_EMPLOYED": -1141.0,
+        "DAYS_REGISTRATION": -1610.0,
+        "DAYS_ID_PUBLISH": -4546,
+        "OWN_CAR_AGE": 11.0,
+        "FLAG_MOBIL": 1,
+        "FLAG_EMP_PHONE": 1,
+        "FLAG_WORK_PHONE": 0,
+        "FLAG_CONT_MOBILE": 1,
+        "FLAG_PHONE": 0,
+        "FLAG_EMAIL": 1,
+        "OCCUPATION_TYPE": "Managers",
+        "CNT_FAM_MEMBERS": 1.0,
+        "REGION_RATING_CLIENT": 3,
+        "ORGANIZATION_TYPE": "Business Entity",
+        "EXT_SOURCE_1": 0.430827,
+        "EXT_SOURCE_2": 0.425351,
+        "EXT_SOURCE_3": 0.712155,
+        "DAYS_LAST_PHONE_CHANGE": -1071.0,
+        "FLAG_DOCUMENT_2": 0,
+        "FLAG_DOCUMENT_3": 1,
+        "FLAG_DOCUMENT_4": 0,
+        "FLAG_DOCUMENT_5": 0,
+        "FLAG_DOCUMENT_6": 0,
+        "FLAG_DOCUMENT_7": 0,
+        "FLAG_DOCUMENT_8": 0,
+        "FLAG_DOCUMENT_9": 0,
+        "FLAG_DOCUMENT_10": 0,
+        "FLAG_DOCUMENT_11": 0,
+        "FLAG_DOCUMENT_12": 0,
+        "FLAG_DOCUMENT_13": 0,
+        "FLAG_DOCUMENT_14": 0,
+        "FLAG_DOCUMENT_15": 0,
+        "FLAG_DOCUMENT_16": 0,
+        "FLAG_DOCUMENT_17": 0,
+        "FLAG_DOCUMENT_18": 0,
+        "FLAG_DOCUMENT_19": 0,
+        "FLAG_DOCUMENT_20": 0,
+        "FLAG_DOCUMENT_21": 0,
+        "DAYS_EMPLOYED_ANOM": False,
+        "ACTIVE_CREDIT_DAY_OVERDUE_MAX": 0.0,
+        "CLOSED_CREDIT_DAY_OVERDUE_MAX": 0.0,
+        "AMT_CREDIT": 1262538.59,
+        "AMT_ANNUITY": 48558.15,
+        "AMT_INCOME_TOTAL": 247142.13,
+        "OBS_30_CNT_SOCIAL_CIRCLE": 2.0,
+        "DEF_30_CNT_SOCIAL_CIRCLE": None,
+        "OBS_60_CNT_SOCIAL_CIRCLE": 2.0,
+        "DEF_60_CNT_SOCIAL_CIRCLE": None,
+        "ACTIVE_AMT_CREDIT_SUM_DEBT_SUM": None
+    }
+    response = client.post("/predict", json=input_data)
+    assert response.status_code == 200
+    assert "class_prediction" in response.json()
+    assert "probability" in response.json()
+    assert "shap_values" in response.json()

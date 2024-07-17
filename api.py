@@ -188,7 +188,6 @@ async def predict(data: DynamicClientInput):
         raise HTTPException(status_code=400, detail=str(e))
 
 # Run the API with uvicorn
-#    Will run on http://127.0.0.1:8000
 # L'API est démarrée uniquement si le script est exécuté directement
 if __name__ == '__main__':
     #uvicorn.run(app, host='127.0.0.1', port=8000)
