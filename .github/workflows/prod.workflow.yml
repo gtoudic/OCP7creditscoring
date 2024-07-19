@@ -28,21 +28,21 @@ jobs:
     - name: Login to Azure Container Registry
       uses: azure/docker-login@v1
       with:
-        login-server: fastapi-cd.azurecr.io
+        login-server: gtfastapicd.azurecr.io
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
      
      
     - name: Build and push container image to registry 
       run: |
-        docker build . -t fastapi-cd.azurecr.io/fastapi-cd:${{ github.sha }}
-        docker push fastapi-cd.azurecr.io/fastapi-cd:${{ github.sha }}
+        docker build . -t gtfastapicd.azurecr.io/fastapi-cd:${{ github.sha }}
+        docker push gtfastapicd.azurecr.io/fastapi-cd:${{ github.sha }}
         
         
     # tester nouvellee étape d'exécution des tests unitaires
     - name: Run Unit Tests
       run: |
-        docker run fastapi-cd.azurecr.io/fastapi-cd:${{ github.sha }} pytest test_api.py
+        docker run gtfastapicd.azurecr.io/fastapi-cd:${{ github.sha }} pytest test_api.py
     #   pytest test_api.py       
         
         
@@ -50,7 +50,7 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'fastapi-cd'
-        images: 'fastapi-cd.azurecr.io/fastapi-cd:${{ github.sha }}'
+        images: 'gtfastapicd.azurecr.io/fastapi-cd:${{ github.sha }}'
         slot-name: 'staging'
     
        

@@ -35,7 +35,7 @@ DEFAULT_COLOR = "gray"
 # Sélection des valeurs par l'utilisateur
 name_contract_type = st.selectbox("Type de Contrat", contract_types)
 amt_credit = st.number_input("Montant du crédit", value=0.00, step=1000.00)
-duration_credit = st.number_input("Durée du crédit (en année)", value=0, min_value=0, max_value=25, step=1)
+duration_credit = st.number_input("Durée du crédit (en année)", value=1, min_value=1, max_value=25, step=1)
 birthday = st.date_input("Date de naissance", date)
 amt_income = st.number_input("Montant des revenus (annuels)", value=0.00, step=1000.00)
 code_gender = st.selectbox("Genre", genders)
