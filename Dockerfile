@@ -8,8 +8,7 @@ RUN apt-get update && apt-get install -y libgomp1
 COPY ./api.py /app/api.py
 COPY ./requirements_api.txt /app/requirements.txt
 ADD ./models /app/models
-#COPY ./Pipfile /app/Pipfile
-#COPY ./Pipfile.lock /app/Pipfile.lock
+COPY ./test_api.py /app/test_api.py
 
 # set the working directory in the container to be /app
 WORKDIR /app

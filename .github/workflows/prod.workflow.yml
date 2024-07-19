@@ -1,5 +1,3 @@
-# attention j'ai recopié le code du tuto, il faut le comprendre et l'adapter !
-
 name: Build and deploy to production a container to Azure Web App - api.py
 
 
@@ -39,11 +37,10 @@ jobs:
         docker push gtfastapicd.azurecr.io/fastapi-cd:${{ github.sha }}
         
         
-    # tester nouvellee étape d'exécution des tests unitaires
+    # nouvelle étape d'exécution des tests unitaires
     - name: Run Unit Tests
       run: |
-        docker run gtfastapicd.azurecr.io/fastapi-cd:${{ github.sha }} pytest test_api.py
-    #   pytest test_api.py       
+        docker run gtfastapicd.azurecr.io/fastapi-cd:${{ github.sha }} pytest test_api.py    
         
         
     - name: Deploy to App Service
