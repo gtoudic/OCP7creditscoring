@@ -8,6 +8,8 @@ Déploiement d'un modèle de prédiction de défaut de paiement des clients et c
 
 ## Structure du repository
 
+- `README.md` : fichier introductif permettant de comprendre l'objectif du projet et le découpage des dossiers
+
 - `.github/workflows/`: Contient le fichier de configuration pour l'intégration et le déploiement continu (CI/CD) avec GitHub Actions.
   - prod.workflow.yml : Script pour déployer l'API sur Azure
   
@@ -22,20 +24,18 @@ Déploiement d'un modèle de prédiction de défaut de paiement des clients et c
 
 - `api.py`: Le script principal qui définit l'API FastAPI.
 
-- `test_api.py`:Le script des tests unitaires pour vérifier les fonctionnalités de l'API.
+- `test_api.py`: Le script des tests unitaires pour vérifier les fonctionnalités de l'API.
 
-- `requirements.txt`: Liste toutes les dépendances Python nécessaires pour exécuter le projet.
-- `requirements_API.txt`: Liste toutes les dépendances Python nécessaires pour exécuter l'API.
+- `requirements.txt`: Liste des pacakages/dépendances Python nécessaires pour exécuter le projet.
+- `requirements_API.txt`: Liste des packages/dépendances Python nécessaires pour exécuter l'API.
 
-- `Dockerfile`
+- `Dockerfile` : processus de construction de l'image conteneur de l'API
 
 - `dashboard.py`: Le script de l'application Streamlit.
 
-Les fichiers avec les packages utilisés pour l'ensemble du projet s'intitulent : requierements.txt.  
 
 Lien vers l'API : https://fastapi-cd.azurewebsites.net/docs#
 
-Lien vers l'interface Streamlit : https://nomacompleter.azurewebsites.net
 
 *Ce projet a été développé dans le cadre du parcours de formation de Data Scientist d'OpenClassRooms.*  
 *Actuellement, ce projet est fourni à des fins éducatives et de démonstration.*
