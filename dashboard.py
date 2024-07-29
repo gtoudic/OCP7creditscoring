@@ -11,10 +11,10 @@ image = Image.open("E:/0-PROFESSIONNEL/formation data scientist OpenClassrooms/P
 st.image(image, use_column_width=True, clamp=True, width=200)
 
 # API url en local ou sur le cloud à adapter afin d'assurer la communication entre application Streamlit et API de prédiction
-API_URL = "http://127.0.0.1:8000/"
+#API_URL = "http://127.0.0.1:8000/"
 #API_URL = "http://0.0.0.0:8000/"
-#API_URL = "https://fastapi-cd.azurewebsites.net/"
-# si cloud alors ajouter pillow==10.0.1 a requirements_api.txt ?
+API_URL = "https://fastapi-cd.azurewebsites.net/"
+
 
 # Définir les options pour les menus déroulants avec une option vide par défaut
 contract_types = [""] + ["Cash loans", "Revolving loans"]
@@ -69,7 +69,7 @@ if st.button("Obtenir la prédiction"):
 
         # Appel à l'API de prédiction
         try:
-            response = requests.post(API_URL + "predict/", json=input_data)
+            response = requests.post(f"{API_URL}/predict", json=input_data)
             response_data = response.json()
             
             if response.status_code == 200:

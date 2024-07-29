@@ -23,7 +23,7 @@ explainer_path = os.path.join(BASE_DIR, "models", "explainer.pkl")
 #data_path = os.path.join(BASE_DIR, "data", "test_brut_data.csv")
 #data_path = os.path.join(BASE_DIR, "data", "test_data.csv")
 
-# Chargement du modèle et de l'explainer SHAP
+# Chargement du modèle, de son preprocessing et de son explainer SHAP
 prep = joblib.load(prep_path)
 model = joblib.load(best_model_path)
 explainer = joblib.load(explainer_path)
@@ -190,5 +190,7 @@ async def predict(data: DynamicClientInput):
 # Run the API with uvicorn
 # L'API est démarrée uniquement si le script est exécuté directement
 if __name__ == '__main__':
-    uvicorn.run(app, host='127.0.0.1', port=8000)
-    #uvicorn.run(app, host='0.0.0.0', port=8000)
+   # en local ou sur le cloud
+   uvicorn.run(app, host='127.0.0.1', port=8000)
+   #uvicorn.run(app, host='0.0.0.0', port=8000)
+   #uvicorn.run(app, host='0.0.0.0', port=80)
